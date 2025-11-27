@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+string leerEntrada();
+int procesar(string mensaje);
+void responder(int tipo);
+
+int main() {
+    string mensaje = leerEntrada();
+    int tipo = procesar(mensaje);
+    responder(tipo);
+
+    return 0;
+}
+
+string leerEntrada() {
+    string texto;
+    cout << "Chatbot: Hola! ¿En qué puedo ayudarte?\nTú: ";
+    getline(cin, texto);
+    return texto;
+}
+
+int procesar(string mensaje) {
+    vector<string> saludos = {"hola", "buenas", "hey"};
+    vector<string> consultas = {"como", "que", "por que", "donde"};
+    vector<string> despedidas = {"adios", "chao", "nos vemos"};
+
+    for(string s : saludos)
+        if(mensaje.find(s) != string::npos)
+            return 1;
+
+    for(string c : consultas)
+        if(mensaje.find(c) != string::npos)
+            return 2;
+
+    for(string d : despedidas)
+        if(mensaje.find(d) != string::npos)
+            return 3;
+
+    return 0;
+}
+
+void responder(int tipo) {
+    if(tipo == 1)
+        cout << "Chatbot: ¡Hola! Qué gusto saludarte :D\n";
+    else if(tipo == 2)
+        cout << "Chatbot: Buena pregunta, déjame pensar...\n";
+    else if(tipo == 3)
+        cout << "Chatbot: ¡Hasta luego! Cuídate!\n";
+    else
+        cout << "Chatbot: No entendí muy bien, ¿podrías repetir?\n";
+}
